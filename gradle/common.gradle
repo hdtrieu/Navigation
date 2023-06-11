@@ -1,0 +1,22 @@
+def projectOrNull(projectName) {
+    try {
+        return project(projectName)
+    } catch (Throwable ignore) {
+    }
+    return null
+}
+
+def deps = [:]
+def version = [:]
+
+version.constraintlayout = "2.1.4"
+
+deps.constraintlayout = "androidx.constraintlayout:constraintlayout:${version.constraintlayout}"
+deps.internal = [:]
+deps.internal.common = projectOrNull(":common")
+deps.internal.navigator = projectOrNull(":navigator")
+deps.internal.home = projectOrNull(":home")
+deps.internal.detail = projectOrNull(":detail")
+deps.internal.search = projectOrNull(":search")
+
+ext.deps = deps

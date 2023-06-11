@@ -1,0 +1,39 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+def shouldInclude(moduleName) {
+    if (hasProperty('only')) {
+        return only.split(",").contains(moduleName)
+    }
+    return true
+}
+
+include ':app'
+
+if (shouldInclude("home")) {
+    include ':home'
+}
+
+if (shouldInclude("detail")) {
+    include ':detail'
+}
+
+if (shouldInclude("search")) {
+    include ':search'
+}
+
+rootProject.name = "Navigator"
+include ':navigator'
+include ':common'
